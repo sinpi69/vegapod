@@ -25,10 +25,10 @@ export default function LevitationTelemetryPanel() {
         </div>
         <div className="bg-[#111] p-3 rounded border border-[#222]">
           <div className="text-xs text-gray-400 mb-1">
-            Target Current (A)
+            Target Current (mA)
           </div>
           <div className="text-lg font-bold text-[#00ffcc]">
-            {targetCurrentMa/1000}
+            {targetCurrentMa}
           </div>
         </div>
         <div className="bg-[#111] p-3 rounded border border-[#222]">
