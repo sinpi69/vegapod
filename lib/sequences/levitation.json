@@ -1,0 +1,26 @@
+{
+  "start": [
+    {
+      "label": "Cooling ON",
+      "cmd": "#CON&",
+      "wait": 2000
+    },
+    {
+      "label": "Levitation ON",
+      "cmd": "L#1&",
+      "wait": 0
+    }
+  ],
+  "stop": [
+    {
+      "label": "Levitation OFF",
+      "cmd": "L#0&",
+      "wait": 0
+    },
+    {
+      "label": "Cooling OFF",
+      "cmd": "#COF&",
+      "wait": 0
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "steps": [
+    { "label": "Brake Actuated", "cmd": "#ACT&",  "wait": 1000 },
+    { "label": "Brake Retracted", "cmd": "#RET&",  "wait": 1000 },
+    { "label": "Inverter ON", "cmd": "I#156&", "wait": 7000 },
+    { "label": "Inverter OFF", "cmd": "I#000&", "wait": 0 },
+    { "label": "Brake Actuated", "cmd": "#ACT&",  "wait": 0 }
+  ]
+}
