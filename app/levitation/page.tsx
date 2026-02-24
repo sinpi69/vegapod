@@ -32,7 +32,6 @@ export default function LevitationTestPage() {
   const levitating = useAppSelector((s) => s.levitation.on);
   const telemetry = useAppSelector((s) => s.telemetry.data);
 
-
   const runningRef = useRef(false);
   const [runningUI, setRunningUI] = useState(false);
 
@@ -83,7 +82,6 @@ export default function LevitationTestPage() {
   return (
     <main className="min-h-screen bg-[#0e0e0e] text-[#00ffcc] p-6 font-mono">
       <div className="max-w-6xl mx-auto space-y-6">
-
         {/* TITLE */}
         <h1 className="text-2xl text-white">LEVITATION TEST</h1>
 
@@ -99,46 +97,36 @@ export default function LevitationTestPage() {
           <CoolingCard
             connected={connected}
             coolingOn={cooling}
-            setCoolingOn={() => {}}
             brakeActuated={false}
             send={send}
           />
 
           <div className="flex gap-4 pt-2">
-          <ActionButton
-            label="RUN SEQUENCE"
-            color="green"
-            disabled={!connected || runningUI}
-            onClick={runSequence}
-          />
+            <ActionButton
+              label="RUN SEQUENCE"
+              color="green"
+              disabled={!connected || runningUI}
+              onClick={runSequence}
+            />
 
-          <ActionButton
-            label="STOP SEQUENCE"
-            color="red"
-            disabled={!runningUI}
-            onClick={stopSequence}
-          />
-        </div>
+            <ActionButton
+              label="STOP SEQUENCE"
+              color="red"
+              disabled={!runningUI}
+              onClick={stopSequence}
+            />
+          </div>
         </div>
         <div className="flex gap-4 pt-2">
-          <LevitationCard
-            connected={connected}
-            send={send}
-          />
+          <LevitationCard connected={connected} send={send} />
           <LevitationTelemetryPanel />
         </div>
-        
 
         {/* ===== SEQUENCE CONTROLS ===== */}
-        
 
         {/* ===== LEVITATION TELEMETRY ===== */}
 
-          <TelemetryPanel
-                        telemetry={telemetry}
-                        title="COOLING TELEMETRY"
-                      />
-
+        <TelemetryPanel telemetry={telemetry} title="COOLING TELEMETRY" />
       </div>
     </main>
   );
