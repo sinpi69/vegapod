@@ -24,89 +24,103 @@ export default function StickyHeader({
   const dispatch = useAppDispatch();
 
   return (
-    <div className="
-      sticky top-0 z-50
-      backdrop-blur-md
-      bg-[#0e0e0e]/90
-      border-b border-[#00ffcc]
-      shadow-[0_0_20px_#00ffcc22]
-    ">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex flex-wrap items-center justify-between gap-6">
+    <header
+      className="
+        sticky top-0 z-50
+        backdrop-blur-md
+        bg-black/80
+        border-b border-[#00ffcc]/40
+      "
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        {/* LEFT: CONNECTION STATUS */}
-        <div className="flex items-center gap-6">
+        {/* ===== TITLE ===== */}
+        <div className="text-xl font-bold tracking-widest text-[#00ffcc]">
+          VEGAPOD CONTROL
+        </div>
 
-          <div className="font-bold text-white tracking-wider">
-            WS:
+        {/* ===== RIGHT SIDE ===== */}
+        <div className="flex items-center gap-14">
+
+          {/* ================= WS ================= */}
+          <div className="flex items-center gap-6">
+
+            <div className="text-xs text-gray-400 font-mono">
+              WebSocket:
+            </div>
+            {/* STATUS ON RIGHT */}
             <span
-              className={`ml-2 ${
+              className={`px-3 py-1 rounded-full border text-xs font-mono ${
                 connected
-                  ? "text-lime-400 animate-pulse"
-                  : "text-red-500"
+                  ? "border-green-500/40 text-green-400 bg-green-500/10 animate-pulse"
+                  : "border-red-500/40 text-red-400 bg-red-500/10"
               }`}
             >
               {connected ? "CONNECTED" : "DISCONNECTED"}
             </span>
+            <div className="flex gap-3">
+              <ActionButton
+                label="CONNECT"
+                color="green"
+                disabled={connected}
+                onClick={onConnect}
+              />
+              <ActionButton
+                label="DISCONNECT"
+                color="red"
+                disabled={!connected}
+                onClick={onDisconnect}
+              />
+            </div>
+
+            
+
           </div>
 
-          <div className="flex gap-3">
-            <ActionButton
-              label="CONNECT"
-              color="green"
-              disabled={connected}
-              onClick={onConnect}
-            />
-            <ActionButton
-              label="DISCONNECT"
-              color="red"
-              disabled={!connected}
-              onClick={onDisconnect}
-            />
-          </div>
-        </div>
+          {/* ================= BRAKE ================= */}
+          <div className="flex items-center gap-6">
 
-        {/* RIGHT: BRAKE CONTROL */}
-        <div className="flex items-center gap-6">
-
-          <div className="font-bold text-white tracking-wider">
-            BRAKE:
+            <div className="text-xs text-gray-400 font-mono">
+              BRAKE:
+            </div>
+            {/* STATUS ON RIGHT */}
             <span
-              className={`ml-2 ${
+              className={`px-3 py-1 rounded-full border text-xs font-mono ${
                 brake
-                  ? "text-red-500 animate-pulse"
-                  : "text-lime-400"
+                  ? "border-red-500/40 text-red-400 bg-red-500/10 animate-pulse"
+                  : "border-green-500/40 text-green-400 bg-green-500/10"
               }`}
             >
               {brake ? "ACTUATED" : "RETRACTED"}
             </span>
-          </div>
+            <div className="flex gap-3">
+              <ActionButton
+                label="ACTUATE"
+                color="red"
+                disabled={!connected || brake}
+                onClick={() => {
+                  send("#ACT&");
+                  onBrakeActuate();
+                  dispatch(brakeActuated());
+                }}
+              />
+              <ActionButton
+                label="RETRACT"
+                color="green"
+                disabled={!connected || !brake}
+                onClick={() => {
+                  send("#RET&");
+                  dispatch(brakeRetracted());
+                }}
+              />
+            </div>
 
-          <div className="flex gap-3">
-            <ActionButton
-              label="ACTUATE"
-              color="red"
-              disabled={!connected || brake}
-              onClick={() => {
-                send("#ACT&");
-                onBrakeActuate();
-                dispatch(brakeActuated());
-              }}
-            />
+            
 
-            <ActionButton
-              label="RETRACT"
-              color="green"
-              disabled={!connected || !brake}
-              onClick={() => {
-                send("#RET&");
-                dispatch(brakeRetracted());
-              }}
-            />
           </div>
 
         </div>
-
       </div>
-    </div>
+    </header>
   );
 }

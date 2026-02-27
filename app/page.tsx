@@ -23,7 +23,6 @@ export default function Page() {
 
   return (
     <main className="min-h-screen bg-[#0e0e0e] text-[#00ffcc] font-mono">
-
       {/* ================= STICKY HEADER ================= */}
       <StickyHeader
         connected={connected}
@@ -39,18 +38,12 @@ export default function Page() {
 
       {/* ================= MAIN CONTENT ================= */}
       <div className="max-w-7xl mx-auto p-6 space-y-6">
-
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-
           {/* ================= LEFT SIDE (CONTROLS) ================= */}
           <div className="xl:col-span-2 space-y-6">
-
             {/* Top Control Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <InverterCard
-                connected={connected}
-                send={send}
-              />
+              <InverterCard connected={connected} send={send} />
 
               <CoolingCard
                 connected={connected}
@@ -58,26 +51,20 @@ export default function Page() {
                 brakeActuated={brake}
                 send={send}
               />
+
+              {/* Levitation Full Width */}
+              <LevitationCard 
+                connected={connected} 
+                send={send} />
             </div>
-
-            {/* Levitation Full Width */}
-            <LevitationCard
-              connected={connected}
-              send={send}
-            />
-
           </div>
 
           {/* ================= RIGHT SIDE (TELEMETRY) ================= */}
           <div className="space-y-6">
-            <TelemetryPanel
-              telemetry={telemetry}
-              title="COOLING TELEMETRY"
-            />
+            <TelemetryPanel telemetry={telemetry} title="COOLING TELEMETRY" />
 
             <LevitationTelemetryPanel />
           </div>
-
         </div>
       </div>
     </main>
